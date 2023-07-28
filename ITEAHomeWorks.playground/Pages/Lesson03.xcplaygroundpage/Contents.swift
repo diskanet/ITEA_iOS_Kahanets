@@ -18,7 +18,7 @@ func iAmOlder(firstAge: Int, secondAge: Int) -> Bool {
         return true
     } else if firstAge < secondAge {
         print("A person who is \(secondAge) is older than a person who is \(firstAge)")
-        return true
+        return false
     } else {
         print("Both person are the same age")
         return false
@@ -27,7 +27,7 @@ func iAmOlder(firstAge: Int, secondAge: Int) -> Bool {
     
 }
 
-iAmOlder(firstAge: 30, secondAge: 31)
+let amIOlder = iAmOlder(firstAge: 25, secondAge: 30)
 
 //
 // 2. yearOfBirth - приймає 2 числа (ваш вік і поточний рік), обчислює рік народження та виводить у консоль
@@ -77,19 +77,20 @@ onlyEvenNumbers(range: 4...13)
 //
 
 func getSum(
-    firstNum a:Int,
-    secondNum b:Int,
-    thirdNum c:Int,
-    fourthNum d:Int
+    firstNum:Int,
+    secondNum:Int,
+    thirdNum:Int,
+    fourthNum:Int
 ) -> Int {
     
-    let result = (a + b) * c % d
+    let result = (firstNum + secondNum) * thirdNum % fourthNum
     print(result)
     return result
 }
 
-let sumResult = getSum(firstNum: 20, secondNum: 20, thirdNum: 5, fourthNum: 30)
+let sumResult = getSum(firstNum: 30, secondNum: 20, thirdNum: 5, fourthNum: 30)
 print(sumResult)
+
 
 
 
