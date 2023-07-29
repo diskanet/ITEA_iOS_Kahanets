@@ -1,15 +1,12 @@
-import UIKit
-
-
 //
 // Home Work Lesson 3. Create 4 functions
 //
 // Created by Dima Kahanets
 //
 
-//
+import UIKit
+
 // 1. iAmOlder - приймає 2 числа, перевіряє хто старший та повертає bool
-//
 
 func iAmOlder(firstAge: Int, secondAge: Int) -> Bool {
     
@@ -24,27 +21,24 @@ func iAmOlder(firstAge: Int, secondAge: Int) -> Bool {
         return false
     }
     
-    
 }
 
 let amIOlder = iAmOlder(firstAge: 25, secondAge: 30)
 
-//
-// 2. yearOfBirth - приймає 2 числа (ваш вік і поточний рік), обчислює рік народження та виводить у консоль
-//
 
-func yearOfBirth(userAge: Int, currentYear: Int) {
+// 2. yearOfBirth - приймає 2 числа (ваш вік і поточний рік), обчислює рік народження та виводить у консоль
+
+func yearOfBirth(yourAge: Int, currentYear: Int) {
     
-    let yearOfBirth = currentYear - userAge
+    let yearOfBirth = currentYear - yourAge
     print("You were born in \(yearOfBirth).")
     
 }
 
-yearOfBirth(userAge: 28, currentYear: 2023)
+yearOfBirth(yourAge: 28, currentYear: 2023)
 
-//
+
 // 3. onlyEvenNumbers - приймає range чисел та виводить у консоль тільки парні числа
-//
 
 // Variant 1
 
@@ -72,24 +66,24 @@ onlyEvenNumbers(4...13)
 
 onlyEvenNumbers(range: 4...13)
 
-//
+
 // 4. getSum - приймає 4 числа, з яких перші 2 додає, після чого множить на третє і знаходить залишок від поділу з четвертого числа - виводить у консоль та повертає
-//
 
 func getSum(
-    firstNum:Int,
-    secondNum:Int,
-    thirdNum:Int,
-    fourthNum:Int
+    firstNum: Int,
+    secondNum: Int,
+    thirdNum: Int,
+    fourthNum: Int
 ) -> Int {
     
     let result = (firstNum + secondNum) * thirdNum % fourthNum
     print(result)
     return result
+    
 }
 
 let sumResult = getSum(firstNum: 30, secondNum: 20, thirdNum: 5, fourthNum: 30)
-print(sumResult)
+print("The remainder of the division is \(sumResult)")
 
 
 
