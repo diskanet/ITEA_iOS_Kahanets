@@ -20,7 +20,7 @@ class Animal {
     init(name: String, feetCount: UInt = 4) {
         self.name = name
         self.feetCount = feetCount
-
+        
     }
     
     func voice() {
@@ -28,9 +28,9 @@ class Animal {
     }
     
     func produceProduct() {
-            // By default, no animal can produce products
-            print("\(name) can't produce any product")
-        }
+        // By default, no animal can produce products
+        print("\(name) can't produce any product")
+    }
 }
 
 class Bird: Animal {
@@ -41,7 +41,7 @@ class Bird: Animal {
         self.wingsCount = wingsCount
         self.canFly = canFly
         super.init(name: name, feetCount: feetCount)
-       
+        
     }
     
     func fly() {
@@ -97,7 +97,7 @@ class Hen: Bird {
     
     override func produceProduct() {
         // Hen can produce eggs
-        print("\(name) can't produce eggs.")
+        print("Collecting eggs laid by \(name)...")
     }
 }
 
@@ -114,31 +114,13 @@ let newHen = Hen(name: "Brownie")
 
 // External functions
 
-func getMilk(from animal: Animal) {
+func getMilk(from animal: Cow) {
     animal.produceProduct()
 }
 
-func getEgg(from animal: Animal) {
+func getEgg(from animal: Hen) {
     animal.produceProduct()
 }
 
-
-
-
-// External functions using as?
-
-//func getMilk(from animal: Animal) {
-//    if let cow = animal as? Cow {
-//        print("\(cow.name) is being milked...")
-//    } else {
-//        print("\(animal.name) can't produce any product")
-//    }
-//}
-//
-//func getEgg(from animal: Animal) {
-//    if let hen = animal as? Hen {
-//        print("Collecting of eggs laid by \(hen.name)...")
-//    } else {
-//        print("\(animal.name) can't produce any product")
-//    }
-//}
+getMilk(from: newCow)
+getEgg(from: newHen)

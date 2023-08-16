@@ -36,21 +36,29 @@ enum Experience {
 // The "Athlete" class is used as the base class for all athletes
 
 class Athlete {
-    private var name: String
+    private var firstName: String
+    private var lastName: String
     private var age: UInt
     private var country: String
     private var experienceLevel: Experience
     
-    init(name: String, age: UInt, country: String = "Unknown", experienceLevel: Experience = .beginner) {
-        self.name = name
+    init(
+        firstName: String,
+        lastName: String,
+        age: UInt,
+        country: String,
+        experienceLevel: Experience
+    ) {
+        self.firstName = firstName
+        self.lastName = lastName
         self.age = age
         self.country = country
         self.experienceLevel = experienceLevel
     }
     
-    func getName() -> String {
-        // returns the value of the "name" private property
-        return name
+    func getFullName() -> String {
+        // returns the value of the "firstName + lastName" private property
+        return "\(firstName) \(lastName)"
     }
     
     func getAge() -> UInt {
@@ -66,12 +74,6 @@ class Athlete {
     func getExperience() -> Experience {
         // returns the value of the "experienceLevel" private property
         return experienceLevel
-    }
-    
-    
-    
-    func birthday() {
-        age += 1
     }
     
     func train() {
@@ -92,18 +94,20 @@ class Athlete {
 }
 
 
-// The "Game" class is used as the base for all types of games
+// The "Sport" class is used as the base for all types of sport
 
-class Game {
+class Sport {
     let name: String
     let playersCount: UInt
-    var durationMinutes: UInt
+    let durationMinutes: UInt
+    let team: [Athlete]
     let goal: String
     
-    init(name: String, playersCount: UInt, durationMinutes: UInt, goal: String = "Play to win") {
+    init(name: String, playersCount: UInt, durationMinutes: UInt, team: [Athlete], goal: String = "Play to win") {
         self.name = name
         self.playersCount = playersCount
         self.durationMinutes = durationMinutes
+        self.team = team
         self.goal = goal
     }
     
@@ -125,144 +129,171 @@ class Game {
     }
 }
 
-class Basketball: Game {
-    init() {
+
+// The "TeamSport" class is used as the base class for all team sports
+
+class TeamSport: Sport {
+    let teamName: String
+    let playersInTeam: UInt
+    
+    init(teamName: String, playersInTeam: UInt, name: String, playersCount: UInt, durationMinutes: UInt, team: [Athlete], goal: String ) {
+        self.teamName = teamName
+        self.playersInTeam = playersInTeam
         super.init(
-            name: "Basketball",
-            playersCount: 10,
-            durationMinutes: 48,
+            name: name,
+            playersCount: playersCount,
+            durationMinutes: durationMinutes,
+            team: team,
             goal: "Score as many points as possible by shooting the ball into the opponent's basket"
         )
     }
 }
 
-class Football: Game {
-    init() {
+class Basketball: TeamSport {
+    init(teamName: String, playersInTeam: UInt, team: [Athlete]) {
         super.init(
+            teamName: teamName,
+            playersInTeam: 5,
+            name: "Basketball",
+            playersCount: 10,
+            durationMinutes: 48,
+            team: team,
+            goal: "Score as many points as possible by shooting the ball into the opponent's basket"
+        )
+    }
+}
+
+class Football: TeamSport {
+    init(teamName: String, playersInTeam: UInt, team: [Athlete]) {
+        super.init(
+            teamName: teamName,
+            playersInTeam: 11,
             name: "Football",
             playersCount: 22,
             durationMinutes: 90,
+            team: team,
             goal: "Score goals by getting the ball into the opponent's net while preventing them from doing the same"
         )
     }
 }
 
-class Tennis: Game {
-    init() {
+class Tennis: Sport {
+    init(team: [Athlete]) {
         super.init(
             name: "Tennis",
             playersCount: 2,
             durationMinutes: 240,
+            team: team,
             goal: "Defeat the opponent by hitting the ball in a way that it lands within the opponent's court"
         )
     }
 }
 
-class PingPong: Game {
-    init() {
+class PingPong: Sport {
+    init(team: [Athlete]) {
         super.init(
             name: "Ping Pong",
             playersCount: 2,
             durationMinutes: 6,
+            team: team,
             goal: "Score points by hitting the ball onto the opponent's table in such a way that they cannot return it"
         )
     }
 }
 
-class Volleyball: Game {
-    init() {
+class Volleyball: TeamSport {
+    init(teamName: String, playersInTeam: UInt, team: [Athlete]) {
         super.init(
+            teamName: teamName,
+            playersInTeam: 6,
             name: "Volleyball",
             playersCount: 12,
             durationMinutes: 90,
+            team: team,
             goal: "Win points by hitting the ball over the net into the opponent's court, preventing them from returning it effectively"
         )
     }
 }
 
-class Chess: Game {
-    init() {
+class Chess: Sport {
+    init(team: [Athlete]) {
         super.init(
             name: "Chess",
             playersCount: 2,
             durationMinutes: 240,
+            team: team,
             goal: "Checkmate the opponent's king using strategic moves of the pieces"
         )
     }
 }
 
-class Poker: Game {
-    init() {
+class Poker: Sport {
+    init(team: [Athlete]) {
         super.init(
             name: "Poker",
             playersCount: 4,
             durationMinutes: 240,
+            team: team,
             goal: "Form the best possible hand among the players or to force them to fold by betting strategically"
         )
     }
 }
 
-class Fencing: Game {
-    init() {
+class Fencing: Sport {
+    init(team: [Athlete]) {
         super.init(
             name: "Fencing",
             playersCount: 2,
             durationMinutes: 9,
+            team: team,
             goal: "score \"touch\" points on the opponent using a sword or foil while adhering to rules and strategy"
         )
     }
 }
 
 
-// Creating instances of Athlete class
+// The "Basketball" class is used as the base class to create a basketball team. In this casy "Chicago Bulls" team
 
-let dima = Athlete(name: "Dima", age: 28, country: "Ukraine", experienceLevel: .advanced)
-let oleg = Athlete(name: "Oleg", age: 31, country: "Ukraine", experienceLevel: .intermediate)
-let kaleo = Athlete(name: "Kaleo", age: 18, country: "Iceland", experienceLevel: .beginner)
-let george = Athlete(name: "George", age: 37, country: "Australia", experienceLevel: .professional)
-let johnny = Athlete(name: "Johnny", age: 15, country: "USA", experienceLevel: .newbie)
-let vadym = Athlete(name: "Vadym", age: 27, country: "Ukraine", experienceLevel: .advanced)
-let olena = Athlete(name: "Olena", age: 30, country: "Ukraine", experienceLevel: .professional)
-let victoria = Athlete(name: "Victoria", age: 17, country: "Spain", experienceLevel: .beginner)
+class ChicagoBulls: Basketball {
+    init() {
+        super.init(
+            teamName: "Chicago Bulls",
+            playersInTeam: 5,
+            team: [
+                Athlete(firstName: "Michael", lastName: "Jordan", age: 58, country: "United States", experienceLevel: .professional),
+                Athlete(firstName: "Scottie", lastName: "Pippen", age: 56, country: "United States", experienceLevel: .professional),
+                Athlete(firstName: "Dennis", lastName: "Rodman", age: 60, country: "United States", experienceLevel: .professional),
+                Athlete(firstName: "Derrick", lastName: "Rose", age: 32, country: "United States", experienceLevel: .advanced),
+                Athlete(firstName: "Luol", lastName: "Deng", age: 36, country: "South Sudan", experienceLevel: .intermediate),
+                
+            ]
+        )
+    }
+}
 
-let team: [Athlete] = [dima, oleg]
 
+// Creating instances of "ChicagoBulls" class
 
-// Creating instances of Game class
-
-let basketball = Basketball()
-let football = Football()
-let tennis = Tennis()
-let pingPong = PingPong()
-let volleyball = Volleyball()
-let chess = Chess()
-let poker = Poker()
-let fencing = Fencing()
+let chicagoBulls = ChicagoBulls()
 
 
 // External function
 
-func startGame(game: Game, team: [Athlete], with: Equipment) {
-    let message: String
+func startGame(team: [Athlete], with: Equipment) {
     let equipmentDescription = with.rawValue
     // instead of accessing the private(name, age, ...) properties, we use the public(getName, getAge(), ...) methods to get the properties
     let playerList = team.enumerated().map { (index, athlete) in
-        "\(index + 1): \(athlete.getName()), \(athlete.getAge()), \(athlete.getExperience()) athlete from \(athlete.getCountry())"
+        "\(index + 1): \(athlete.getFullName()), \(athlete.getAge()) years, \(athlete.getExperience()) athlete from \(athlete.getCountry())"
     }.joined(separator: "\n")
     
-    if team.count == game.playersCount {
-        message = """
-               Welcome to an exciting \(game.name) game!
-               This game requires \(team.count) players and the following equipment: \(equipmentDescription)
+    let message: String = """
+               Welcome to an exciting game!
+               This game requires the following equipment: \(equipmentDescription)
                The game involves:
                \(playerList)
-               To win this game, players must: \(game.goal)
                """
-    } else {
-        message = "\(game.name) requires \(game.playersCount) players"
-    }
     
     print(message)
 }
 
-startGame(game: fencing, team: team, with: .fencing)
+startGame(team: chicagoBulls.team, with: .basketball)
