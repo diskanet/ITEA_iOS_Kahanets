@@ -113,7 +113,7 @@ class Sport {
     
     
     func startGame() {
-        print("The \(name) game has started")
+        print("The \(name) has started")
     }
     
     func startBreak() {
@@ -125,7 +125,7 @@ class Sport {
     }
     
     func endGame() {
-        print("The \(name) game has ended")
+        print("The \(name) has ended")
     }
 }
 
@@ -136,7 +136,15 @@ class TeamSport: Sport {
     let teamName: String
     let playersInTeam: UInt
     
-    init(teamName: String, playersInTeam: UInt, name: String, playersCount: UInt, durationMinutes: UInt, team: [Athlete], goal: String ) {
+    init(
+        teamName: String,
+        playersInTeam: UInt,
+        name: String,
+        playersCount: UInt,
+        durationMinutes: UInt,
+        team: [Athlete],
+        goal: String
+    ) {
         self.teamName = teamName
         self.playersInTeam = playersInTeam
         super.init(
@@ -150,7 +158,7 @@ class TeamSport: Sport {
 }
 
 class Basketball: TeamSport {
-    init(teamName: String, playersInTeam: UInt, team: [Athlete]) {
+    init(teamName: String, team: [Athlete]) {
         super.init(
             teamName: teamName,
             playersInTeam: 5,
@@ -164,7 +172,7 @@ class Basketball: TeamSport {
 }
 
 class Football: TeamSport {
-    init(teamName: String, playersInTeam: UInt, team: [Athlete]) {
+    init(teamName: String, team: [Athlete]) {
         super.init(
             teamName: teamName,
             playersInTeam: 11,
@@ -202,7 +210,7 @@ class PingPong: Sport {
 }
 
 class Volleyball: TeamSport {
-    init(teamName: String, playersInTeam: UInt, team: [Athlete]) {
+    init(teamName: String, team: [Athlete]) {
         super.init(
             teamName: teamName,
             playersInTeam: 6,
@@ -258,7 +266,6 @@ class ChicagoBulls: Basketball {
     init() {
         super.init(
             teamName: "Chicago Bulls",
-            playersInTeam: 5,
             team: [
                 Athlete(firstName: "Michael", lastName: "Jordan", age: 58, country: "United States", experienceLevel: .professional),
                 Athlete(firstName: "Scottie", lastName: "Pippen", age: 56, country: "United States", experienceLevel: .professional),
@@ -286,7 +293,7 @@ func startGame(team: [Athlete], with: Equipment) {
         "\(index + 1): \(athlete.getFullName()), \(athlete.getAge()) years, \(athlete.getExperience()) athlete from \(athlete.getCountry())"
     }.joined(separator: "\n")
     
-    let message: String = """
+    let message = """
                Welcome to an exciting game!
                This game requires the following equipment: \(equipmentDescription)
                The game involves:
@@ -295,5 +302,8 @@ func startGame(team: [Athlete], with: Equipment) {
     
     print(message)
 }
+
+
+// Example of a function call:
 
 startGame(team: chicagoBulls.team, with: .basketball)
